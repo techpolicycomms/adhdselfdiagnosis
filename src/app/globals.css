@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #faf9f6;
+  --foreground: #1a1a1a;
+  --accent: #2d6a4f;
+  --accent-light: #40916c;
+  --accent-muted: #95d5b2;
+  --surface: #ffffff;
+  --surface-muted: #f0f4ef;
+  --border: #d8e2dc;
+  --text-muted: #5c6b5c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-mono: var(--font-mono), monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.font-heading {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Print: hide nav when printing certificate */
+@media print {
+  a[href="/"], button { display: none !important; }
+}

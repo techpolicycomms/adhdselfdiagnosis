@@ -1,0 +1,10 @@
+# Copy to google-ads.yaml and fill in your values.
+# Get credentials: https://developers.google.com/google-ads/api/docs/oauth/overview
+
+developer_token: "YOUR_DEVELOPER_TOKEN"
+client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com"
+client_secret: "YOUR_CLIENT_SECRET"
+refresh_token: "YOUR_REFRESH_TOKEN"
+
+# Optional: use a login customer ID if using an MCC account
+# login_customer_id: "123-456-7890"

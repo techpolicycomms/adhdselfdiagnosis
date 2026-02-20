@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "MindFlow Research - Cookie Donation",
+  "version": "1.0.0",
+  "description": "Donate your anonymized cookie patterns to ADHD research. Only domain/name metadata is shared—values are never sent.",
+  "permissions": ["cookies", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
