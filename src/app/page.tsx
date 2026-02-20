@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { PrivacyBadge } from "@/components/PrivacyBadge";
-import { AccountLink } from "@/components/AccountLink";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <header className="absolute right-6 top-6">
-        <AccountLink />
-      </header>
       {/* Hero */}
       <main className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -140,16 +136,16 @@ export default function Home() {
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             <a
-              href="https://www.adhdchatter.com/"
+              href="https://www.youtube.com/@ADHD_Chatter_Podcast"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-stone-200 bg-white p-4 transition-colors hover:border-emerald-300 hover:bg-emerald-50/30"
             >
               <h3 className="font-semibold text-stone-900">ADHD Chatter</h3>
-              <p className="mt-1 text-sm text-stone-500">Podcast</p>
+              <p className="mt-1 text-sm text-stone-500">YouTube channel</p>
             </a>
             <a
-              href="https://www.youtube.com/@HowToADHD"
+              href="https://www.youtube.com/@HowtoADHD"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-stone-200 bg-white p-4 transition-colors hover:border-emerald-300 hover:bg-emerald-50/30"

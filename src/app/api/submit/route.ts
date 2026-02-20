@@ -79,9 +79,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("Submit error:", err);
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("Submit error:", message, err);
     return NextResponse.json(
-      { error: "Failed to save submission" },
+      {
+        error: "Failed to save submission",
+        details: process.env.NODE_ENV === "development" ? message : undefined,
+      },
       { status: 500 }
     );
   }

@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PrivacyBadge } from "@/components/PrivacyBadge";
-import { ClientAccountLink } from "@/components/ClientAccountLink";
 import { ProgressBar } from "@/components/ProgressBar";
 import {
   SECTIONS,
@@ -87,6 +86,7 @@ function DonateContent() {
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           anonymousId: id,
           diva5Responses: responses,
@@ -95,13 +95,18 @@ function DonateContent() {
           timestamp: new Date().toISOString(),
         }),
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Failed to save");
+        throw new Error(
+          (data as { error?: string }).error || `Failed to save (${res.status})`
+        );
       }
       setStep("results");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      const msg = err instanceof Error ? err.message : "Something went wrong";
+      setError(
+        `${msg}. Please ensure you're connected and try again. If the problem persists, sign in to save your results.`
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -172,18 +177,15 @@ function DonateContent() {
   return (
     <div className="min-h-screen bg-[#faf9f6]">
       <div className="mx-auto max-w-2xl px-6 py-12">
-        <div className="mb-8 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-stone-600 hover:text-stone-900"
-          >
+        <Link
+          href="/"
+          className="mb-8 inline-flex items-center gap-2 text-stone-600 hover:text-stone-900"
+        >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           Back
         </Link>
-          <ClientAccountLink />
-        </div>
 
         {step === "intro" && (
           <div className="space-y-8">
@@ -379,7 +381,14 @@ function DonateContent() {
                   {isSubmitting ? "Saving..." : "Continue"}
                 </button>
               </div>
-              {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+              {error && (
+                <div className="mt-4 space-y-2">
+                  <p className="text-sm text-red-600">{error}</p>
+                  <p className="text-xs text-stone-500">
+                    Tip: Sign in first to save your assessment to your account.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -472,13 +481,13 @@ function DonateContent() {
               </p>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <a href="https://www.adhdchatter.com/" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-600 hover:text-emerald-700">
+                  <a href="https://www.youtube.com/@ADHD_Chatter_Podcast" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-600 hover:text-emerald-700">
                     ADHD Chatter
                   </a>
-                  <span className="ml-2 text-stone-500">— Podcast</span>
+                  <span className="ml-2 text-stone-500">— YouTube channel</span>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/@HowToADHD" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-600 hover:text-emerald-700">
+                  <a href="https://www.youtube.com/@HowtoADHD" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-600 hover:text-emerald-700">
                     How to ADHD
                   </a>
                   <span className="ml-2 text-stone-500">— YouTube channel</span>
