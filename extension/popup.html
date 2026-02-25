@@ -5,7 +5,7 @@
   <style>
     * { box-sizing: border-box; }
     body {
-      width: 320px;
+      width: 340px;
       margin: 0;
       padding: 16px;
       font-family: system-ui, -apple-system, sans-serif;
@@ -16,11 +16,36 @@
     h1 {
       font-size: 16px;
       font-weight: 600;
-      margin: 0 0 8px;
+      margin: 0 0 4px;
       color: #2d6a4f;
     }
-    p { margin: 0 0 12px; color: #5c6b5c; line-height: 1.4; }
-    .step { font-size: 12px; color: #78716c; margin-bottom: 12px; }
+    .subtitle {
+      font-size: 12px;
+      color: #78716c;
+      margin: 0 0 12px;
+    }
+    p { margin: 0 0 12px; color: #5c6b5c; line-height: 1.4; font-size: 13px; }
+    .privacy-note {
+      font-size: 11px;
+      color: #78716c;
+      background: #f0f4ef;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .privacy-note strong { color: #2d6a4f; }
+    .step {
+      font-size: 13px;
+      color: #44403c;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #f5f3ef;
+      border: 1px solid #e7e5e4;
+      line-height: 1.4;
+    }
+    .step strong { color: #2d6a4f; }
     button {
       width: 100%;
       padding: 12px 16px;
@@ -42,9 +67,10 @@
       background: transparent;
       color: #5c6b5c;
       border: 1px solid #d8e2dc;
+      font-size: 13px;
     }
     .btn-secondary:hover { background: #f0f4ef; }
-    .status { margin-top: 12px; padding: 10px; border-radius: 8px; font-size: 13px; }
+    .status { margin-top: 12px; padding: 10px; border-radius: 8px; font-size: 13px; line-height: 1.4; }
     .status.success { background: #d1fae5; color: #065f46; }
     .status.error { background: #fee2e2; color: #991b1b; }
     .status.warn { background: #fef3c7; color: #92400e; }
@@ -53,13 +79,17 @@
 </head>
 <body>
   <h1>MindFlow Research</h1>
-  <p>Donate anonymized cookie patterns to help ADHD research. Only domain/name metadata is shared—values are never sent.</p>
+  <p class="subtitle">Cookie Pattern Donation</p>
+
+  <div class="privacy-note">
+    <strong>Privacy:</strong> Only cookie domain/name metadata is shared. Values, contents, and personal data are <strong>never</strong> sent.
+  </div>
 
   <div id="step-install" class="step">
-    <strong>Step 1:</strong> Complete the questionnaire at mindflow-research.local
+    <strong>Step 1:</strong> Complete the questionnaire on the research site, then return here to donate.
   </div>
   <div id="step-donate" class="step hidden">
-    <strong>Step 2:</strong> Click below to donate your cookie patterns
+    <strong>Ready!</strong> Click below to donate your anonymized cookie patterns.
   </div>
 
   <button id="donate-btn" class="btn-primary">Donate cookie patterns</button>
