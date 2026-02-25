@@ -128,10 +128,13 @@ function DonateContent() {
     changeStep("onset");
   }, [changeStep]);
 
+  const [saveWarning, setSaveWarning] = useState<string | null>(null);
+
   const handleFromOnset = useCallback(async () => {
     if (!ageOfOnset) return;
     setIsSubmitting(true);
     setError(null);
+    setSaveWarning(null);
     const id = generateAnonymousId();
     setAnonymousId(id);
     try {
@@ -156,9 +159,10 @@ function DonateContent() {
       changeStep("results");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
-      setError(
-        `${msg}. Please ensure you're connected and try again. If the problem persists, sign in to save your results.`
+      setSaveWarning(
+        `Your answers could not be saved to the server (${msg}), but your analysis is still available below. Sign in or try again later to save permanently.`
       );
+      changeStep("results");
     } finally {
       setIsSubmitting(false);
     }
@@ -498,9 +502,15 @@ function DonateContent() {
 
         {step === "results" && (
           <div className="space-y-8">
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4">
-              <p className="font-medium text-emerald-800">Your answers have been saved.</p>
-            </div>
+            {saveWarning ? (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50/50 p-4">
+                <p className="text-sm text-amber-800">{saveWarning}</p>
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4">
+                <p className="font-medium text-emerald-800">Your answers have been saved.</p>
+              </div>
+            )}
             <h1 className="text-2xl font-bold text-stone-900 sm:text-3xl">
               Your free analysis
             </h1>
