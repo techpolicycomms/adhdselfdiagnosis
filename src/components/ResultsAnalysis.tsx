@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { AnalysisResult } from "@/lib/diva5-analysis";
 
 interface ResultsAnalysisProps {
@@ -84,12 +85,12 @@ export function ResultsAnalysis({
               Skip to finish
             </button>
           ) : (
-            <a
+            <Link
               href="/"
               className="rounded-xl border border-stone-300 py-4 px-6 text-center font-medium text-stone-700 hover:bg-stone-50"
             >
               Skip to finish
-            </a>
+            </Link>
           )}
         </div>
       )}

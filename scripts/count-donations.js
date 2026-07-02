@@ -4,8 +4,8 @@
  * Run from project root: node scripts/count-donations.js
  */
 
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const dir = path.join(process.cwd(), "data", "submissions");
 if (!fs.existsSync(dir)) {
